@@ -22,3 +22,10 @@ select s.StudentID,s.StudentName,AVG(m.Mark) from student s
 select s.StudentID,s.StudentName,AVG(Mark) from student s
     join mark m on s.StudentID = m.StudentID group by s.StudentID, s.StudentName
     having avg(m.Mark) >= ALL (select avg(Mark) from mark group by mark.StudentID);
+select subid, subname, credit, status,max(Credit) from subject;
+select subject.SubID, subname, credit, status,MAX(Mark)as 'điểm thi lớn nhất' from subject
+    join mark m on subject.SubID = m.SubID;
+select s.StudentName,s.Address,s.Phone,avg(m.Mark) from student s
+    join mark m on s.StudentID = m.StudentID group by s.StudentName, s.Address, s.Phone
+order by avg(m.mark) desc ;
+
