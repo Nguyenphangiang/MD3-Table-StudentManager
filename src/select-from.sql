@@ -12,3 +12,13 @@ select * from subject where Credit between 3 and 5;
 update student set ClassID = 2 where StudentName = 'Hung';
 
 select StudentName,SubName,Mark from student join subject s on student.Status = s.Status join mark m on s.SubID = m.SubID order by Mark DESC ;
+
+select Address,count(StudentID)as 'Số lượng học viên' from student group by Address;
+select s.StudentID,s.StudentName,AVG(mark) from student s
+    join mark m on s.StudentID = m.StudentID group by s.StudentID, s.StudentName;
+select s.StudentID,s.StudentName,AVG(m.Mark) from student s
+    join mark m on s.StudentID = m.StudentID group by s.StudentID, s.StudentName
+    having avg(m.Mark) > 9;
+select s.StudentID,s.StudentName,AVG(Mark) from student s
+    join mark m on s.StudentID = m.StudentID group by s.StudentID, s.StudentName
+    having avg(m.Mark) >= ALL (select avg(Mark) from mark group by mark.StudentID);
